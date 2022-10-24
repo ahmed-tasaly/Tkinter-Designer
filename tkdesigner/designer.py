@@ -19,8 +19,10 @@ class Designer:
         """Return main code.
         """
         window_data = self.file_data["document"]["children"][0]["children"][0]
-
-        frame = Frame(window_data, self.figma_file, self.output_path)
+        try:
+            frame = Frame(window_data, self.figma_file, self.output_path)
+        except Exception:
+            raise Exception("Frame not found in figma file or is empty")
         return frame.to_code(TEMPLATE)
 
     def design(self):
